@@ -100,6 +100,7 @@ export const CountryPicker = ({
   showOnly,
   ListHeaderComponent,
   itemTemplate: ItemTemplate = CountryButton,
+  modalProps,
   ...rest
 }: Props) => {
   // ToDo refactor exclude and showOnly props to objects
@@ -249,6 +250,7 @@ export const CountryPicker = ({
       isVisible={showModal}
       onShow={openModal}
       onModalWillHide={onRequestClose}
+      {...modalProps}
     >
       <View
         style={{
