@@ -193,26 +193,26 @@ export const CountryPicker = ({
     extrapolate: "clamp",
   });
 
-  const modalBackdropFade = animationDriver.interpolate({
-    inputRange: [0, 0.5, 1],
-    outputRange: [0, 0.5, 1],
+  const modalBackdropFade = modalPosition.interpolate({
+    inputRange: [0, height],
+    outputRange: [1, 0],
     extrapolate: "clamp",
   });
 
   const openModal = () => {
-    Animated.timing(animationDriver, {
+    Animated.spring(animationDriver, {
       toValue: 1,
-      duration: 400,
       useNativeDriver: true,
     }).start();
   };
 
   const closeModal = () => {
+    setShowModal(false);
     Animated.timing(animationDriver, {
       toValue: 0,
-      duration: 400,
       useNativeDriver: true,
-    }).start(() => setShowModal(false));
+      duration: 200
+    }).start();
   };
 
   const renderItem = ({
@@ -255,7 +255,7 @@ export const CountryPicker = ({
       <View
         style={{
           flex: 1,
-          justifyContent: "flex-end",
+          justifyContent: "flex-end"
         }}
       >
         {!disableBackdrop && (
@@ -265,7 +265,7 @@ export const CountryPicker = ({
               {
                 flex: 1,
                 opacity: modalBackdropFade,
-                backgroundColor: "rgba(0,0,0,0.45)",
+                backgroundColor: "rgba(0,0,0, 0.45)",
                 position: "absolute",
                 width: "100%",
                 height: "100%",
